@@ -26,4 +26,6 @@ Chapter 4
 
 
 extend `functional_test.py`
+refactor to use templates
+add template `home.html`
 
