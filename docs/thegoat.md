@@ -24,8 +24,7 @@ create lists app and `views.home_page`
 Chapter 4
 =========
 
-
-extend `functional_test.py`
+extend `functional_test.py` to test saveing and retriving an item
 refactor to use templates
 add template `home.html`
 
@@ -33,5 +32,6 @@ add template `home.html`
 Chapter 5
 =========
 
-
+input form with post
+extended `functional_test.py` to test saving more items
 
