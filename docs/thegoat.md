@@ -34,4 +34,6 @@ Chapter 5
 
 input form with post
 extended `functional_test.py` to test saving more items
+refactor `functional_tests.py` using helper function `check_for_row_in_list_table`
+add Item model
 
