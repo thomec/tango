@@ -80,8 +80,8 @@ class ListViewTest(TestCase):
         Item.objects.create(text='itemey 1', list=correct_list)
         Item.objects.create(text='itemey 2', list=correct_list)
         other_list = List.objects.create()
-        Item.objects.create(text='other list item 1', list=list_)
-        Item.objects.create(text='other list item 2', list=list_)
+        Item.objects.create(text='other list item 1', list=other_list)
+        Item.objects.create(text='other list item 2', list=other_list)
 
 
         response = self.client.get('/lists/%d/' % (correct_list.id,))
