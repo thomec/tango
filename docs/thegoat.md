@@ -43,3 +43,8 @@ Chapter 6
 
 cleaning up test after ft
 
+-> `sqlite3.IntegrityError: NOT NULL constraint failed: lists_item.list_id`
+
+
+
+
