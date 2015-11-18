@@ -43,8 +43,11 @@ Chapter 6
 
 cleaning up test after ft
 
+in "Capturing Parameters from URLs":
 -> `sqlite3.IntegrityError: NOT NULL constraint failed: lists_item.list_id`
 
+remove db-file, makemigrations, migrate didn't help
+set `null=True` in item.model solved the issue
 
-
+-> url parttern `(.+)` doesn't work, use `(P?<list_id>[0-9]+)`
 
