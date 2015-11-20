@@ -51,3 +51,12 @@ set `null=True` in item.model solved the issue
 
 -> url parttern `(.+)` doesn't work, use `(P?<list_id>[0-9]+)`
 
+
+Chapter 9
+=========
+
+in `def _get_latest_source()`
+-> what does `git log -n 1 --format=%H`? ... Hash?
+
+
+
