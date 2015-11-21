@@ -40,10 +40,4 @@ def new_list(request):
         return render(request, 'lists/home.html', {'error': error})
     return redirect('/lists/%d/' % (list_.id))
 
-"""
-def add_item(request, list_id):     # moved to view_list -> can be deleted
-    list_ = List.objects.get(id=list_id)
-    Item.objects.create(text=request.POST['item_text'], list=list_)
-    return redirect('/lists/%d/' % (list_.id,))
-"""
 
