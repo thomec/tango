@@ -1,11 +1,12 @@
 # lists/tests/test_views.py
 
+from unittest.case import skip
 
 from django.test import TestCase
-from unittest.case import skip
 from django.http import HttpRequest
 from django.core.urlresolvers import resolve
 from django.template.loader import render_to_string
+from django.utils.html import escape
 
 from lists.views import home_page
 from lists.models import Item, List
@@ -89,8 +90,8 @@ class NewListTest(TestCase):
     def test_validation_errors_are_sent_back_to_home_page_template(self):
         response = self.client.post('/lists/new', data={'item_text': ''})
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'home.html')
-        expected_error = "You can't have an empty list item"
+        self.assertTemplateUsed(response, 'lists/home.html')
+        expected_error = escape("You can't have an empty list item") # -> You can&#39;t
         self.assertContains(response, expected_error)
 
 
