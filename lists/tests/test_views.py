@@ -128,8 +128,8 @@ class NewListTest(TestCase):
         self.assertEqual(List.objects.count(), 0)
         self.assertEqual(Item.objects.count(), 0)
 
-
-class NewItemTest(TestCase):    # moved to ListViewTest -> can be deleted
+"""
+class NewItemTest(TestCase):    # moved to ListViewTest -> must be deleted
 
     def test_can_save_POST_request_to_an_existing_list(self):
         other_list = List.objects.create()
@@ -156,5 +156,5 @@ class NewItemTest(TestCase):    # moved to ListViewTest -> can be deleted
         )
 
         self.assertRedirects(response, '/lists/%d/' % (correct_list.id,))
-
+"""
 
