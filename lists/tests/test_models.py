@@ -7,12 +7,6 @@ from django.core.exceptions import ValidationError
 from lists.models import Item, List
 
 
-class SmokeTest(TestCase):
-
-    def test_bad_maths(self):
-        self.assertEqual(1 + 2, 3)
-
-
 class ListAndItemModelTest(TestCase):
 
     def test_saving_and_retrieving_items(self):
