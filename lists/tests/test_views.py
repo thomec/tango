@@ -19,6 +19,7 @@ class SmokeTest(TestCase):
 
 
 class HomePageTest(TestCase):
+    maxDiff = None
 
     def test_root_url_resolves_to_home_page_view(self):         # to be deleted
         found = resolve('/')
@@ -29,8 +30,8 @@ class HomePageTest(TestCase):
         request = HttpRequest()
         response = home_page(request)
         expected_html = render_to_string('lists/home.html', {'form': ItemForm()})
-        self.assertEqual(response.content.decode(), expected_html)
-        #self.assertMultiLineEqual(response.content.decode(), expected_html)
+        # self.assertEqual(response.content.decode(), expected_html)
+        self.assertMultiLineEqual(response.content.decode(), expected_html)
 
 
     def test_home_page_only_saves_items_when_necessary(self):   # to be deleted
