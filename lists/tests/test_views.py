@@ -10,7 +10,7 @@ from django.utils.html import escape
 
 from lists.views import home_page
 from lists.models import Item, List
-
+from lists.forms import ItemForm
 
 class SmokeTest(TestCase):
 
@@ -20,22 +20,33 @@ class SmokeTest(TestCase):
 
 class HomePageTest(TestCase):
 
-    def test_root_url_resolves_to_home_page_view(self):
+    def test_root_url_resolves_to_home_page_view(self):         # to be deleted
         found = resolve('/')
         self.assertEqual(found.func, home_page)
 
 
-    def test_home_page_returns_correct_html(self):
+    def test_home_page_returns_correct_html(self):              # to be deleted
         request = HttpRequest()
         response = home_page(request)
-        expected_html = render_to_string('lists/home.html')
+        expected_html = render_to_string('lists/home.html', {'form': ItemForm()})
         self.assertEqual(response.content.decode(), expected_html)
+        #self.assertMultiLineEqual(response.content.decode(), expected_html)
 
 
-    def test_home_page_only_saves_items_when_necessary(self):
+    def test_home_page_only_saves_items_when_necessary(self):   # to be deleted
         request = HttpRequest()
         home_page(request)
         self.assertEqual(Item.objects.count(), 0)
+        
+        
+    def test_home_page_renders_home_template(self):
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'lists/home.html')
+
+
+    def test_home_page_uses_item_form(self):
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm)
         
         
 class ListViewTest(TestCase):
