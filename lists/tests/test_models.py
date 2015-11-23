@@ -8,7 +8,7 @@ from lists.models import Item, List
 
 
 class ItemModelTest(TestCase):
-
+    """
     def test_saving_and_retrieving_items(self):     # to be deleted
         list_ = List()                              # test_default_text and test_item_is_related_to_list
         list_.save()                                # are enough test for our model
@@ -34,7 +34,7 @@ class ItemModelTest(TestCase):
         self.assertEqual(first_saved_item.text, 'The first (ever) list item')
         self.assertEqual(first_saved_item.list, list_)
         self.assertEqual(second_saved_item.text, 'Item the second')
-        self.assertEqual(second_saved_item.list, list_)
+        self.assertEqual(second_saved_item.list, list_)"""
 
 
     def test_default_text(self):
