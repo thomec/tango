@@ -70,9 +70,9 @@ class ListViewTest(TestCase):
     def post_invalid_input(self):
         list_ = List.objects.create()
         return self.client.post(
-            '/lists/%d/' % (list_.id,),
-            data={'text': ''}
-        )
+                '/lists/%d/' % (list_.id,),
+                data={'text': ''}
+                )
 
 
     def test_uses_list_template(self):
@@ -109,9 +109,9 @@ class ListViewTest(TestCase):
         correct_list = List.objects.create()
 
         self.client.post(
-            '/lists/%d/' % (correct_list.id,),
-            data={'text': 'A new item for an existing list'}
-        )
+                '/lists/%d/' % (correct_list.id,),
+                data={'text': 'A new item for an existing list'}
+                )
 
         self.assertEqual(Item.objects.count(), 1)
         new_item = Item.objects.first()
@@ -124,9 +124,9 @@ class ListViewTest(TestCase):
         correct_list = List.objects.create()
 
         response = self.client.post(
-            '/lists/%d/' % (correct_list.id,),
-            data={'text': 'A new item for an existing list'}
-        )
+                '/lists/%d/' % (correct_list.id,),
+                data={'text': 'A new item for an existing list'}
+                )
 
         self.assertRedirects(response, '/lists/%d/' % (correct_list.id,))
 
@@ -155,8 +155,17 @@ class ListViewTest(TestCase):
         response = self.post_invalid_input()
         self.assertContains(response, escape(EMPTY_ITEM_ERROR))
 
+    @skip
+    def test_duplicate_item_validation_errors_end_up_on_lists_page(self):
+        list1 = List.objects.create()
+        item1 = Item.objects.create(list=list1, text='textey')
+        response = self.client.post(
+                '/lists/%d/' % (list1.id,),
+                data={'text': 'textey'}
+                )
 
-
-
-
+        expected_error = escape("You've already got this in your list!")
+        self.assertContains(response, expected_error)
+        self.assertTemplateUsed(response, 'list.html')
+        self.assertEqual(Item.objects.all().count(), 1)
 
