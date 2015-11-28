@@ -67,5 +67,5 @@ Session.vim
 db.sqlite3
 
 # static files
-static/
+# static/
 
