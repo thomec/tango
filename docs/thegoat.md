@@ -62,27 +62,15 @@ in `def _get_latest_source()`
 Chapter 15
 ==========
 
-    python manage.py makemigrations
-	SystemCheckError: System check identified some issues:
 
-	ERRORS:
-	accounts.ListUser.groups: (fields.E304) Reverse accessor for 'ListUser.groups' clashes with reverse accessor for 'User.groups'.
-        HINT: Add or change a related_name argument to the definition for 'ListUser.groups' or 'User.groups'.
-	accounts.ListUser.user_permissions: (fields.E304) Reverse accessor for 'ListUser.user_permissions' clashes with reverse accessor for 'User.user_permissions'.
-        HINT: Add or change a related_name argument to the definition for 'ListUser.user_permissions' or 'User.user_permissions'.
-	auth.User.groups: (fields.E304) Reverse accessor for 'User.groups' clashes with reverse accessor for 'ListUser.groups'.
-        HINT: Add or change a related_name argument to the definition for 'User.groups' or 'ListUser.groups'.
-	auth.User.user_permissions: (fields.E304) Reverse accessor for 'User.user_permissions' clashes with reverse accessor for 'ListUser.user_permissions'.
-        HINT: Add or change a related_name argument to the definition for 'User.user_permissions' or 'ListUser.user_permissions'.
-	(tango)thomec@beule:~/devel/tango$`
+After spiking and changing back to `master`, the changes in `urls.py` and `base.html` where still there. I uncommented them after getting 'cannot import accounts' error.
+
+later in the chapter, when copying the `lists/static` folder to `superlists/static` the tests do pass, but
+
+    * I get `Not Found: /favicon.ico` from every test.
+    * When I load test.html, the second test fails and passes alternating on every reload.
 
 
+Later in 'A Simple Mock to Unit Test Our initialize Function' - the test `accounts/static/tests/test.html` passes from the beginning.
 
-because I forgot in settings.py
-
-    AUTH_USER_MODEL = 'accounts.ListUser'
-    AUTHENTICATION_BACKENDS = (
-        'accounts.authentication.PersonaAuthenticationBackend',
-    )
-
-
+copy the code from `https://github.com/hjwp/book-example/tree/chapter_15`
