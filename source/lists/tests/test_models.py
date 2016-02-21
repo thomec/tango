@@ -64,6 +64,7 @@ class ItemModelTest(TestCase):
         with self.assertRaises(ValidationError):
             item = Item(list=list_, text='bla')
             item.full_clean()
+            #item.save() # gives IntegrityError instead
 
 
     def test_CAN_save_same_item_to_different_lists(self):
@@ -98,4 +99,3 @@ class ListModelTest(TestCase):
     def test_get_absolute_url(self):
         list_ = List.objects.create()
         self.assertEqual(list_.get_absolute_url(), '/lists/%d/' % (list_.id,))
-

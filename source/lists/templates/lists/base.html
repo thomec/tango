@@ -1,66 +1,65 @@
 <!DOCTYPE html>
 <html lang=en>
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/static/icon/letter_L.ico" type="image/x-icon">
-    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/base.css" rel="stylesheet">
-    <title>To-Do lists</title>
-  </head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/static/icon/letter_L.ico" type="image/x-icon">
+        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/base.css" rel="stylesheet">
+        <title>To-Do lists</title>
+    </head>
 
-  <body>
-    <div class="container">
+    <body>
+        <div class="container">
 
-      <nav class="navbar navbar-default" role="navigation">
-        <a class="navbar-brand" href="/">Tango</a>
-        <a class="btn navbar-btn navbar-right" id="id_login" href="#">Sign in</a>
-      </nav>
+            <nav class="navbar navbar-default" role="navigation">
+                <a class="navbar-brand" href="/">Tango</a>
+                <a class="btn navbar-btn navbar-right" id="id_login" href="#">Sign in</a>
+            </nav>
 
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3 jumbotron">
-          <div class="text-center">
-            <h1>{% block header_text %}{% endblock %}</h1>
-            <form method="post" action="{% block form_action %}{% endblock %}">
-              {% csrf_token %}
-              {{ form.text }}
-              {% if form.errors %}
-              <div class="form-group has-error">
-                <span class="help-block">{{ form.text.errors }}</span>
-              </div>
-              {% endif %}
-            </form>
-          </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 jumbotron">
+                    <div class="text-center">
+                        <h1>{% block header_text %}{% endblock %}</h1>
+                        <form method="post" action="{% block form_action %}{% endblock %}">
+                            {% csrf_token %}
+                            {{ form.text }}
+                            {% if form.errors %}
+                            <div class="form-group has-error">
+                                <span class="help-block">{{ form.text.errors }}</span>
+                            </div>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    {% block table %}
+                    {% endblock %}
+                </div>
+            </div>
+
+            <script src="http://code.jquery.com/jquery.min.js"></script>
+            <script src="https://login.persona.org/include.js"></script>
+            <script src="/static/list.js"></script>
+            <script src="/static/accounts.js"></script>
+
+            <script>
+$(document).ready(function() {
+    var user = "{{ user.email }}" || null;
+    var token = "{{ csrf_token }}";
+    var urls = {
+        login: "TODO",
+        logout: "TODO",
+    };
+    Tango.Accounts.initialize(navigator, user, token, urls);
+});
+            </script>
+
         </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          {% block table %}
-          {% endblock %}
-        </div>
-      </div>
-
-      <script src="http://code.jquery.com/jquery.min.js"></script>
-      <script src="https://login.persona.org/include.js"></script>
-      <script src="/static/list.js"></script>
-      <script src="/static/accounts.js"></script>
-
-      <script>
-        $(document).ready(function() {
-          var user = "{{ user.email }}" || null;
-          var token = "{{ csrf_token }}";
-          var urls = {
-            login: "TODO",
-            logout: "TODO",
-            };
-          Tango.Accounts.initialize(navigator, user, token, urls);
-          });
-      </script>
-
-    </div>
-  </body>
+    </body>
 </html>
-
