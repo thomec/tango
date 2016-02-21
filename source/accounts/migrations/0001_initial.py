@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+import django.utils.timezone
 
 
 class Migration(migrations.Migration):
@@ -13,8 +14,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254)),
+                ('email', models.EmailField(max_length=254, serialize=False, primary_key=True)),
+                ('last_login', models.DateTimeField(default=django.utils.timezone.now)),
             ],
         ),
     ]
