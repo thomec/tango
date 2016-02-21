@@ -74,3 +74,9 @@ later in the chapter, when copying the `lists/static` folder to `superlists/stat
 Later in 'A Simple Mock to Unit Test Our initialize Function' - the test `accounts/static/tests/test.html` passes from the beginning.
 
 copy the code from `https://github.com/hjwp/book-example/tree/chapter_15`
+
+
+Chapter 16
+==========
+
+The link to the [docs](https://docs.python.org/3/library/unittest.mock-magicmethods.html) in Note 31 is not working
