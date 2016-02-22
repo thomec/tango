@@ -62,7 +62,6 @@ in `def _get_latest_source()`
 Chapter 15
 ==========
 
-
 After spiking and changing back to `master`, the changes in `urls.py` and `base.html` where still there. I uncommented them after getting 'cannot import accounts' error.
 
 later in the chapter, when copying the `lists/static` folder to `superlists/static` the tests do pass, but

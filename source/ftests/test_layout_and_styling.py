@@ -1,10 +1,10 @@
  # ftests/test_layout_and_styling.py
 
 
-from .base import FuncTest
+from .base import FunctionalTest
 
 
-class LayoutAndStylingTest(FuncTest):
+class LayoutAndStylingTest(FunctionalTest):
 
     def test_layout_and_styling(self):
         # Edith goes to the home page
@@ -17,7 +17,7 @@ class LayoutAndStylingTest(FuncTest):
             inputbox.location['x'] + inputbox.size['width'] / 2,
             512,
             delta=5
-            )
+        )
 
         # She starts a new list and sees the input is nicely
         # centered there too
@@ -27,5 +27,4 @@ class LayoutAndStylingTest(FuncTest):
             inputbox.location['x'] + inputbox.size['width'] / 2,
             512,
             delta=5
-            )
-
+        )

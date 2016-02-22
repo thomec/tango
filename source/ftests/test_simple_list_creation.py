@@ -4,10 +4,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-from .base import FuncTest
+from .base import FunctionalTest
 
 
-class NewVisitorTest(FuncTest):    
+class NewVisitorTest(FunctionalTest):
 
     def test_can_start_a_list_and_retrive_it_later(self):
         # Edith has heard about a cool new online to-do app. She goes
@@ -78,4 +78,3 @@ class NewVisitorTest(FuncTest):
         self.assertIn('Buy milk', page_text)
 
         # Satisfied, they both go back to sleep
-
