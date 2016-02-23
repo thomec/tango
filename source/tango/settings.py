@@ -28,7 +28,11 @@ SECRET_KEY = 'o596_)sgf)#7agsw2^l92f40lbiba7%$ht_4dy6680$(7v!r$d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# needed for persona authentication
+DOMAIN = "localhost"
+#DOMAIN = 'http://hotzenplotz.pythonanywhere.com'
+
+ALLOWED_HOSTS = [DOMAIN]
 
 
 # Application definition
@@ -42,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'lists',
     'accounts',
+    'ftests',
 )
 
 AUTH_USER_MODEL = 'accounts.User'
