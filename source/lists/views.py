@@ -35,3 +35,7 @@ def view_list(request, list_id):
             return redirect(list_)      # instead of ('/lists/%d/' % (list_.id,))
 
     return render(request, 'lists/list.html', {'list': list_, 'form': form})
+
+
+def my_lists(request, email):
+    return render(request, 'lists/my_lists.html')
