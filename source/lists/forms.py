@@ -48,3 +48,7 @@ class ExistingListItemForm(ItemForm):
         # call grandparent method instead of customized ItemForm.save()
         # alternatively use super()
         return forms.models.ModelForm.save(self)
+
+
+class NewListForm(object):
+    pass

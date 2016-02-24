@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 
 from lists.models import Item, List
-from lists.forms import ItemForm, ExistingListItemForm
+from lists.forms import ItemForm, ExistingListItemForm, NewListForm
 
 User = get_user_model()
 
@@ -28,6 +28,10 @@ def new_list(request):
         return redirect(list_)      # using get_absolute_url instead of ('view_list', list_.id)
     else:
         return render(request, 'lists/home.html', {'form': form})
+
+
+def new_list2(request):
+    NewListForm(data=request.POST)
 
 
 def view_list(request, list_id):

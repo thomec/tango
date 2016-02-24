@@ -1,6 +1,7 @@
 # lists/tests/test_views.py
 
-from unittest import skip
+import unittest
+#from unittest import skip
 from unittest.mock import Mock, patch
 
 from django.test import TestCase
@@ -10,7 +11,7 @@ from django.http import HttpRequest
 from django.utils.html import escape
 from django.contrib.auth import get_user_model
 
-from lists.views import new_list #, home_page
+from lists.views import new_list, new_list2 #, home_page
 from lists.models import Item, List
 from lists.forms import (
     EMPTY_ITEM_ERROR, DUPLICATE_ITEM_ERROR,
@@ -31,7 +32,7 @@ class HomePageTest(TestCase):
         self.assertIsInstance(response.context['form'], ItemForm)
 
 
-class NewListTest(TestCase):
+class NewListViewIntegratedTest(TestCase):
 
     def test_saving_post_request(self):
         self.client.post('/lists/new', data={'text': 'A new list item'})
@@ -65,7 +66,7 @@ class NewListTest(TestCase):
         response = self.client.post('/lists/new', data={'text': ''})
         self.assertIsInstance(response.context['form'], ItemForm)
 
-    """
+    @unittest.skip
     def test_list_owner_is_saved_if_user_is_authenticated(self):
         request = HttpRequest()
         request.user = User.objects.create(email='a@b.com')
@@ -73,8 +74,8 @@ class NewListTest(TestCase):
         new_list(request)
         list_ = List.objects.first()
         self.assertEqual(list_.owner, request.user)
-    """
 
+    """
     @patch('lists.views.List')
     def test_list_owner_is_saved_if_user_is_authenticated(self, mockList):
         mock_list = List.objects.create()
@@ -94,6 +95,20 @@ class NewListTest(TestCase):
 
         #self.assertEqual(mock_list.owner, request.user)
         mock_list.save.assert_called_once_with()
+    """
+
+
+@patch('lists.views.NewListForm')
+class NewListViewUnitTest(unittest.TestCase): # unittest.Testcase ensures better isolation
+
+    def setUp(self):
+        self.request = HttpRequest()
+        self.request.POST['text'] = 'new list item'
+
+    def test_passes_POST_data_to_NewListForm(self, mockNewListForm):
+        new_list2(self.request)
+        mockNewListForm.assert_called_once_with(data=self.request.POST)
+
 
 class ListViewTest(TestCase):
 
