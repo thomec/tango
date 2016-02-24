@@ -19,7 +19,10 @@ def home_page(request):
 def new_list(request):
     form = ItemForm(data=request.POST)
     if form.is_valid():
-        list_ = List.objects.create()
+        # list_ = List.objects.create()
+        list_ = List()
+        list_.owner = request.user
+        list_.save()
         # Item.objects.create(text=request.POST['text'], list=list_)
         form.save(for_list=list_)   # using the form.save() method instead of objects.create()
         return redirect(list_)      # using get_absolute_url instead of ('view_list', list_.id)
