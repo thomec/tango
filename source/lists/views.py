@@ -1,6 +1,5 @@
 # lists/views.py
 
-
 from django.shortcuts import render, redirect
 #from django.http import HttpResponse
 #from django.core.exceptions import ValidationError

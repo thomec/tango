@@ -1,6 +1,5 @@
 # lists/urls.py
 
-
 from django.conf.urls import include, url
 
 from lists import views
