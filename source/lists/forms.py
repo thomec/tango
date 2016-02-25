@@ -25,11 +25,11 @@ class ItemForm(forms.models.ModelForm):
         error_messages = {
             'text': {'required': EMPTY_ITEM_ERROR}
         }
-
+    """
     def save(self, for_list):
         self.instance.list = for_list
         return super().save()
-
+    """
 
 class ExistingListItemForm(ItemForm):
 
@@ -43,12 +43,12 @@ class ExistingListItemForm(ItemForm):
         except ValidationError as e:
             e.error_dict = {'text': [DUPLICATE_ITEM_ERROR]}
             self._update_errors(e)
-
+    """
     def save(self):
         # call grandparent method instead of customized ItemForm.save()
         # alternatively use super()
         return forms.models.ModelForm.save(self)
-
+    """
 
 class NewListForm(ItemForm):
 

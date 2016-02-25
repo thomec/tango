@@ -15,7 +15,7 @@ User = get_user_model()
 def home_page(request):
     return render(request, 'lists/home.html', {'form': ItemForm()})
 
-
+"""
 def new_list(request):
     form = ItemForm(data=request.POST)
     if form.is_valid():
@@ -30,9 +30,9 @@ def new_list(request):
         return redirect(list_)      # using get_absolute_url instead of ('view_list', list_.id)
     else:
         return render(request, 'lists/home.html', {'form': form})
+"""
 
-
-def new_list2(request):
+def new_list(request):
     form = NewListForm(data=request.POST)
     if form.is_valid():
         list_ = form.save(owner=request.user)
