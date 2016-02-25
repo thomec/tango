@@ -1,12 +1,14 @@
 # lists/tests/test_forms.py
 
+import unittest
 
 from django.test import TestCase
+from unittest.mock import patch, Mock
 
 from lists.models import Item, List
 from lists.forms import (
     EMPTY_ITEM_ERROR, DUPLICATE_ITEM_ERROR,
-    ExistingListItemForm, ItemForm
+    ExistingListItemForm, ItemForm, NewListForm
 )
 
 
@@ -62,6 +64,31 @@ class ExistingListItemFormTest(TestCase):
 
 class NewListFormTest(unittest.TestCase):
 
+    @patch('lists.forms.List.create_new')
+    def test_save_creates_new_list_from_post_data_if_user_not_authenticated(
+        self, mock_List_create_new
+    ):
+        user = Mock(is_authenticated=lambda: False)
+        form = NewListForm(data={'text': 'new item text'})
+        form.is_valid()
+        form.save(owner=user)
+        mock_List_create_new.assert_called_once_with(
+            first_item_text='new item text'
+        )
+
+    @patch('lists.forms.List.create_new')
+    def test_save_creates_new_list_with_owner_if_user_authenticated(
+        self, mock_List_create_new
+    ):
+        user = Mock(is_authenticated=lambda: True)
+        form = NewListForm(data={'text': 'new item text'})
+        form.is_valid()
+        form.save(owner=user)
+        mock_List_create_new.assert_called_once_with(
+            first_item_text='new item text', owner=user
+        )
+
+    """remove the ugly test
     @patch('lists.forms.List')
     @patch('lists.forms.Item')
     def test_save_creates_new_list_and_item_from_post_data(
@@ -82,3 +109,4 @@ class NewListFormTest(unittest.TestCase):
         form.save(owner=user)
 
         self.assertTrue(mock_item.save.called)
+    """
