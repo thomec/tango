@@ -22,9 +22,9 @@ class NewVisitorTest(FunctionalTest):
         # She is invited to enter a to-do item straight away
         inputbox = self.get_item_input_box()
         self.assertEqual(
-                inputbox.get_attribute('placeholder'),
-                'Enter a to-do item'
-                )
+            inputbox.get_attribute('placeholder'),
+            'Enter a to-do item'
+        )
 
         # She types "Buy peacock feathers" into a text box (Edith's hobby
         # is tying fly-fishing lures)
@@ -46,7 +46,9 @@ class NewVisitorTest(FunctionalTest):
 
         # The page updates again, and now shows both items on her list
         self.check_for_row_in_list_table('1: Buy peacock feathers')
-        self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
+        self.check_for_row_in_list_table(
+            '2: Use peacock feathers to make a fly'
+        )
 
         # Now a new user, Francis, comes along to the site.
 
